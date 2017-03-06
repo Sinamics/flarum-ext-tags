@@ -13,7 +13,7 @@ namespace Sinamics\Tags\Access;
 
 use Flarum\Core\Access\AbstractPolicy;
 use Flarum\Core\User;
-use Flarum\Tags\Tag;
+use Sinamics\Tags\Tag;
 use Illuminate\Database\Eloquent\Builder;
 
 class TagPolicy extends AbstractPolicy

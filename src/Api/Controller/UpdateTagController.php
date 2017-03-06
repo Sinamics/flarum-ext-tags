@@ -12,8 +12,8 @@
 namespace Sinamics\Tags\Api\Controller;
 
 use Flarum\Api\Controller\AbstractResourceController;
-use Flarum\Tags\Api\Serializer\TagSerializer;
-use Flarum\Tags\Command\EditTag;
+use Sinamics\Tags\Api\Serializer\TagSerializer;
+use Sinamics\Tags\Command\EditTag;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;

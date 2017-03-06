@@ -12,7 +12,7 @@
 namespace Sinamics\Tags\Access;
 
 use Flarum\Event\GetPermission;
-use Flarum\Tags\Tag;
+use Sinamics\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class GlobalPolicy

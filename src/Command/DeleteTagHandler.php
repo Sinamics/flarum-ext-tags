@@ -12,7 +12,7 @@
 namespace Sinamics\Tags\Command;
 
 use Flarum\Core\Access\AssertPermissionTrait;
-use Flarum\Tags\TagRepository;
+use Sinamics\Tags\TagRepository;
 
 class DeleteTagHandler
 {
@@ -33,7 +33,7 @@ class DeleteTagHandler
 
     /**
      * @param DeleteTag $command
-     * @return \Flarum\Tags\Tag
+     * @return \Sinamics\Tags\Tag
      * @throws \Flarum\Core\Exception\PermissionDeniedException
      */
     public function handle(DeleteTag $command)

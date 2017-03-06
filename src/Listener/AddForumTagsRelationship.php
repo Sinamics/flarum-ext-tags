@@ -18,7 +18,7 @@ use Flarum\Event\GetApiRelationship;
 use Flarum\Event\PrepareApiAttributes;
 use Flarum\Event\PrepareApiData;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Flarum\Tags\Tag;
+use Sinamics\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddForumTagsRelationship
@@ -54,7 +54,7 @@ class AddForumTagsRelationship
     public function getApiRelationship(GetApiRelationship $event)
     {
         if ($event->isRelationship(ForumSerializer::class, 'tags')) {
-            return $event->serializer->hasMany($event->model, 'Flarum\Tags\Api\Serializer\TagSerializer', 'tags');
+            return $event->serializer->hasMany($event->model, 'Sinamics\Tags\Api\Serializer\TagSerializer', 'tags');
         }
     }
 

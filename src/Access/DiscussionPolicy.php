@@ -17,7 +17,7 @@ use Flarum\Core\Discussion;
 use Flarum\Core\User;
 use Flarum\Event\ScopeHiddenDiscussionVisibility;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Flarum\Tags\Tag;
+use Sinamics\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;

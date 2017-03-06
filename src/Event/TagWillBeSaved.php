@@ -12,7 +12,7 @@
 namespace Sinamics\Tags\Event;
 
 use Flarum\Core\User;
-use Flarum\Tags\Tag;
+use Sinamics\Tags\Tag;
 
 class TagWillBeSaved
 {
@@ -34,7 +34,7 @@ class TagWillBeSaved
     /**
      * @param Discussion $discussion
      * @param User $actor
-     * @param \Flarum\Tags\Tag[] $tag
+     * @param \Sinamics\Tags\Tag[] $tag
      */
     public function __construct(Tag $tag, User $actor, array $data)
     {

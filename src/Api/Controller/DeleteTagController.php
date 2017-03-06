@@ -12,7 +12,7 @@
 namespace Sinamics\Tags\Api\Controller;
 
 use Flarum\Api\Controller\AbstractDeleteController;
-use Flarum\Tags\Command\DeleteTag;
+use Sinamics\Tags\Command\DeleteTag;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 

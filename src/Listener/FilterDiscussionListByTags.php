@@ -13,8 +13,8 @@ namespace Sinamics\Tags\Listener;
 
 use Flarum\Event\ConfigureDiscussionGambits;
 use Flarum\Event\ConfigureDiscussionSearch;
-use Flarum\Tags\Gambit\TagGambit;
-use Flarum\Tags\Tag;
+use Sinamics\Tags\Gambit\TagGambit;
+use Sinamics\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Query\Expression;
 

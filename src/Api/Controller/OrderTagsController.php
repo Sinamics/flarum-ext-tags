@@ -13,7 +13,7 @@ namespace Sinamics\Tags\Api\Controller;
 
 use Flarum\Core\Access\AssertPermissionTrait;
 use Flarum\Http\Controller\ControllerInterface;
-use Flarum\Tags\Tag;
+use Sinamics\Tags\Tag;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\EmptyResponse;
 

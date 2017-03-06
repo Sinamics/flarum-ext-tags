@@ -1090,7 +1090,6 @@ System.register('flarum/tags/helpers/tagIcon', [], function (_export, _context) 
 
     if (tag) {
       attrs.style = attrs.style || {};
-
       if (tag.backgroundUrl()) {
         attrs.className = 'Button-icon icon fa fa-fw ' + tag.backgroundUrl();
         attrs.style.fontSize = '20px';
@@ -1098,11 +1097,9 @@ System.register('flarum/tags/helpers/tagIcon', [], function (_export, _context) 
       } else {
         attrs.style.backgroundColor = tag.color();
       }
-      console.log(attrs);
     } else {
       attrs.className += ' untagged';
     }
-
     return m('span', attrs);
   }
 
@@ -1235,7 +1232,7 @@ System.register('flarum/tags/main', ['flarum/Model', 'flarum/models/Discussion',
     }],
     execute: function () {
 
-      app.initializers.add('flarum-flarum-tags', function (app) {
+      app.initializers.add('Sinamics-flarum-tags', function (app) {
         app.routes.tags = { path: '/tags', component: TagsPage.component() };
         app.routes.tag = { path: '/t/:tags', component: IndexPage.component() };
 

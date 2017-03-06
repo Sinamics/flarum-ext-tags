@@ -12,7 +12,7 @@
 namespace Sinamics\Tags\Listener;
 
 use Flarum\Event\ConfigureApiRoutes;
-use Flarum\Tags\Api\Controller;
+use Sinamics\Tags\Api\Controller;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddTagsApi

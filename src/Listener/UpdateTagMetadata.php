@@ -18,8 +18,8 @@ use Flarum\Event\PostWasDeleted;
 use Flarum\Event\PostWasHidden;
 use Flarum\Event\PostWasPosted;
 use Flarum\Event\PostWasRestored;
-use Flarum\Tags\Event\DiscussionWasTagged;
-use Flarum\Tags\Tag;
+use Sinamics\Tags\Event\DiscussionWasTagged;
+use Sinamics\Tags\Tag;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class UpdateTagMetadata

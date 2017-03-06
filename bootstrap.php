@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use Flarum\Tags\Access;
-use Flarum\Tags\Listener;
+use Sinamics\Tags\Access;
+use Sinamics\Tags\Listener;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return function (Dispatcher $events) {

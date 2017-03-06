@@ -12,9 +12,9 @@
 namespace Sinamics\Tags\Command;
 
 use Flarum\Core\Access\AssertPermissionTrait;
-use Flarum\Tags\Event\TagWillBeSaved;
-use Flarum\Tags\TagRepository;
-use Flarum\Tags\TagValidator;
+use Sinamics\Tags\Event\TagWillBeSaved;
+use Sinamics\Tags\TagRepository;
+use Sinamics\Tags\TagValidator;
 
 class EditTagHandler
 {
@@ -42,7 +42,7 @@ class EditTagHandler
 
     /**
      * @param EditTag $command
-     * @return \Flarum\Tags\Tag
+     * @return \Sinamics\Tags\Tag
      * @throws \Flarum\Core\Exception\PermissionDeniedException
      */
     public function handle(EditTag $command)

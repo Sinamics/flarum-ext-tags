@@ -13,7 +13,7 @@ namespace Sinamics\Tags\Gambit;
 
 use Flarum\Core\Search\AbstractRegexGambit;
 use Flarum\Core\Search\AbstractSearch;
-use Flarum\Tags\TagRepository;
+use Sinamics\Tags\TagRepository;
 use Illuminate\Database\Query\Expression;
 
 class TagGambit extends AbstractRegexGambit

@@ -12,8 +12,8 @@
 namespace Sinamics\Tags\Command;
 
 use Flarum\Core\Access\AssertPermissionTrait;
-use Flarum\Tags\Tag;
-use Flarum\Tags\TagValidator;
+use Sinamics\Tags\Tag;
+use Sinamics\Tags\TagValidator;
 
 class CreateTagHandler
 {

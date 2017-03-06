@@ -76,7 +76,7 @@ class Tag extends AbstractModel
      */
     public function parent()
     {
-        return $this->belongsTo('Flarum\Tags\Tag', 'parent_id');
+        return $this->belongsTo('Sinamics\Tags\Tag', 'parent_id');
     }
 
     /**

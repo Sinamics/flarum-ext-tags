@@ -34,7 +34,7 @@ class DiscussionWasTagged
     /**
      * @param Discussion $discussion
      * @param User $actor
-     * @param \Flarum\Tags\Tag[] $oldTags
+     * @param \Sinamics\Tags\Tag[] $oldTags
      */
     public function __construct(Discussion $discussion, User $actor, array $oldTags)
     {

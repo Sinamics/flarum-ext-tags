@@ -760,17 +760,16 @@ System.register('flarum/tags/helpers/tagIcon', [], function (_export, _context) 
 
     if (tag) {
       attrs.style = attrs.style || {};
-
       if (tag.backgroundUrl()) {
-        attrs.className = 'Button-icon fa fa-fw ' + tag.backgroundUrl();
-        attrs.style.Color = tag.color();
+        attrs.className = 'Button-icon icon fa fa-fw ' + tag.backgroundUrl();
+        attrs.style.fontSize = '20px';
+        attrs.style.color = tag.color();
       } else {
         attrs.style.backgroundColor = tag.color();
       }
     } else {
       attrs.className += ' untagged';
     }
-
     return m('span', attrs);
   }
 

@@ -12,8 +12,8 @@
 namespace Sinamics\Tags\Listener;
 
 use Flarum\Event\ConfigurePostTypes;
-use Flarum\Tags\Event\DiscussionWasTagged;
-use Flarum\Tags\Post\DiscussionTaggedPost;
+use Sinamics\Tags\Event\DiscussionWasTagged;
+use Sinamics\Tags\Post\DiscussionTaggedPost;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class CreatePostWhenTagsAreChanged

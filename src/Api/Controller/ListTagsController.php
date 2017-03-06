@@ -12,8 +12,8 @@
 namespace Sinamics\Tags\Api\Controller;
 
 use Flarum\Api\Controller\AbstractCollectionController;
-use Flarum\Tags\Api\Serializer\TagSerializer;
-use Flarum\Tags\Tag;
+use Sinamics\Tags\Api\Serializer\TagSerializer;
+use Sinamics\Tags\Tag;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
@@ -25,12 +25,12 @@ class ListTagsController extends AbstractCollectionController
     public $serializer = TagSerializer::class;
 
     /**
-     * @var \Flarum\Tags\Tag
+     * @var \Sinamics\Tags\Tag
      */
     protected $tags;
 
     /**
-     * @param \Flarum\Tags\Tag $tags
+     * @param \Sinamics\Tags\Tag $tags
      */
     public function __construct(Tag $tags)
     {
