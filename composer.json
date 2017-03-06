@@ -23,6 +23,9 @@
         }
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.1-dev"
+        },
         "flarum-extension": {
             "title": "Tags",
             "icon": {
