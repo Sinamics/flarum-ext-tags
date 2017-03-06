@@ -79,7 +79,7 @@ export default class TagsPage extends Page {
 
   config() {
     this.$('ol, ul')
-      .sortable({connectWith: 'primary'})
+    //  .sortable({connectWith: 'primary'})
       .on('sortupdate', (e, ui) => {
         // If we've moved a tag from 'primary' to 'secondary', then we'll update
         // its attributes in our local store so that when we redraw the change

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Listener;
+namespace Sinamics\Tags\Listener;
 
 use Flarum\Event\ConfigurePostsQuery;
 use Illuminate\Contracts\Events\Dispatcher;

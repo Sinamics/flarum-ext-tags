@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Command;
+namespace Sinamics\Tags\Command;
 
 use Flarum\Core\Access\AssertPermissionTrait;
 use Flarum\Tags\TagRepository;

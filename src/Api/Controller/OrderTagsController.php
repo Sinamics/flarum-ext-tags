@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Api\Controller;
+namespace Sinamics\Tags\Api\Controller;
 
 use Flarum\Core\Access\AssertPermissionTrait;
 use Flarum\Http\Controller\ControllerInterface;

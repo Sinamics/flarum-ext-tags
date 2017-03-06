@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Listener;
+namespace Sinamics\Tags\Listener;
 
 use Flarum\Event\ConfigureForumRoutes;
 use Flarum\Event\ConfigureWebApp;
@@ -25,7 +25,6 @@ class AddClientAssets
         $events->listen(ConfigureWebApp::class, [$this, 'addAssets']);
         $events->listen(ConfigureForumRoutes::class, [$this, 'addRoutes']);
     }
-
     /**
      * @param ConfigureWebApp $app
      */

@@ -13,11 +13,11 @@ export default class EditTagModal extends Modal {
     super.init();
 
     this.tag = this.props.tag || app.store.createRecord('tags');
-
     this.name = m.prop(this.tag.name() || '');
     this.slug = m.prop(this.tag.slug() || '');
     this.description = m.prop(this.tag.description() || '');
     this.color = m.prop(this.tag.color() || '');
+    this.backgroundUrl = m.prop(this.tag.backgroundUrl() || '');
     this.isHidden = m.prop(this.tag.isHidden() || false);
   }
 
@@ -62,6 +62,11 @@ export default class EditTagModal extends Modal {
           </div>
 
           <div className="Form-group">
+            <label>{app.translator.trans('flarum-tags.admin.edit_tag.backgroundUrl_label')}</label>
+            <input className="FormControl" placeholder="fa-icon" value={this.backgroundUrl()} oninput={m.withAttr('value', this.backgroundUrl)}/>
+          </div>
+
+          <div className="Form-group">
             <div>
               <label className="checkbox">
                 <input type="checkbox" value="1" checked={this.isHidden()} onchange={m.withAttr('checked', this.isHidden)}/>
@@ -94,6 +99,7 @@ export default class EditTagModal extends Modal {
       slug: this.slug(),
       description: this.description(),
       color: this.color(),
+      backgroundUrl: this.backgroundUrl(),
       isHidden: this.isHidden()
     };
   }

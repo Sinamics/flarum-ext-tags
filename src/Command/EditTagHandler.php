@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Command;
+namespace Sinamics\Tags\Command;
 
 use Flarum\Core\Access\AssertPermissionTrait;
 use Flarum\Tags\Event\TagWillBeSaved;
@@ -70,6 +70,10 @@ class EditTagHandler
 
         if (isset($attributes['color'])) {
             $tag->color = $attributes['color'];
+        }
+
+        if (isset($attributes['backgroundUrl'])) {
+            $tag->background_path = $attributes['backgroundUrl'];
         }
 
         if (isset($attributes['isHidden'])) {

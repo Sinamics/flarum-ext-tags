@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Command;
+namespace Sinamics\Tags\Command;
 
 use Flarum\Core\Access\AssertPermissionTrait;
 use Flarum\Tags\Tag;
@@ -48,6 +48,7 @@ class CreateTagHandler
             array_get($data, 'attributes.slug'),
             array_get($data, 'attributes.description'),
             array_get($data, 'attributes.color'),
+            array_get($data, 'attributes.backgroundUrl'),
             array_get($data, 'attributes.isHidden')
         );
 

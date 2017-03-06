@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Post;
+namespace Sinamics\Tags\Post;
 
 use Flarum\Core\Post;
 use Flarum\Core\Post\AbstractEventPost;

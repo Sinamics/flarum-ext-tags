@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Access;
+namespace Sinamics\Tags\Access;
 
 use Carbon\Carbon;
 use Flarum\Core\Access\AbstractPolicy;

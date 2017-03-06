@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Event;
+namespace Sinamics\Tags\Event;
 
 use Flarum\Core\User;
 use Flarum\Tags\Tag;

@@ -1,13 +1,13 @@
 {
-    "name": "flarum/flarum-ext-tags",
+    "name": "sinamics/flarum-ext-tags",
     "description": "Organize discussions into a hierarchy of tags and categories.",
     "type": "flarum-extension",
     "keywords": ["discussion"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Toby Zerner",
-            "email": "toby.zerner@gmail.com"
+            "name": "Bernt Christian Egeland",
+            "email": "uavmatrix@uavmatrix.com"
         }
     ],
     "support": {
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Flarum\\Tags\\": "src/"
+            "Sinamics\\Tags\\": "src/"
         }
     },
     "extra": {

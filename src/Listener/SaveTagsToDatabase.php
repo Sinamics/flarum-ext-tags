@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Listener;
+namespace Sinamics\Tags\Listener;
 
 use Flarum\Core\Exception\PermissionDeniedException;
 use Flarum\Core\Exception\ValidationException;

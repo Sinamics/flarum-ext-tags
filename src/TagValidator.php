@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags;
+namespace Sinamics\Tags;
 
 use Flarum\Core\Validator\AbstractValidator;
 

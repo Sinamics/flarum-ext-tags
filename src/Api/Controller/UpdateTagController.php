@@ -8,8 +8,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace Flarum\Tags\Api\Controller;
+ 
+namespace Sinamics\Tags\Api\Controller;
 
 use Flarum\Api\Controller\AbstractResourceController;
 use Flarum\Tags\Api\Serializer\TagSerializer;
@@ -28,7 +28,7 @@ class UpdateTagController extends AbstractResourceController
     /**
      * @var Dispatcher
      */
-    protected $bus;
+    protected $bus; 
 
     /**
      * @param Dispatcher $bus

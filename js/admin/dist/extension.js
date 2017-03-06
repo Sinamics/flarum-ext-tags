@@ -1,417 +1,3 @@
-;(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory);
-  } else if (typeof exports === 'object') {
-    module.exports = factory(require('jquery'));
-  } else {
-    root.sortable = factory(root.jQuery);
-  }
-}(this, function($) {
-/*
- * HTML5 Sortable jQuery Plugin
- * https://github.com/voidberg/html5sortable
- *
- * Original code copyright 2012 Ali Farhadi.
- * This version is mantained by Alexandru Badiu <andu@ctrlz.ro> & Lukas Oppermann <lukas@vea.re>
- *
- *
- * Released under the MIT license.
- */
-'use strict';
-/*
- * variables global to the plugin
- */
-var dragging;
-var draggingHeight;
-var placeholders = $();
-var sortables = [];
-/*
- * remove event handlers from items
- * @param [jquery Collection] items
- * @info event.h5s (jquery way of namespacing events, to bind multiple handlers to the event)
- */
-var _removeItemEvents = function(items) {
-  items.off('dragstart.h5s');
-  items.off('dragend.h5s');
-  items.off('selectstart.h5s');
-  items.off('dragover.h5s');
-  items.off('dragenter.h5s');
-  items.off('drop.h5s');
-};
-/*
- * remove event handlers from sortable
- * @param [jquery Collection] sortable
- * @info event.h5s (jquery way of namespacing events, to bind multiple handlers to the event)
- */
-var _removeSortableEvents = function(sortable) {
-  sortable.off('dragover.h5s');
-  sortable.off('dragenter.h5s');
-  sortable.off('drop.h5s');
-};
-/*
- * attache ghost to dataTransfer object
- * @param [event] original event
- * @param [object] ghost-object with item, x and y coordinates
- */
-var _attachGhost = function(event, ghost) {
-  // this needs to be set for HTML5 drag & drop to work
-  event.dataTransfer.effectAllowed = 'move';
-  event.dataTransfer.setData('text', '');
-
-  // check if setDragImage method is available
-  if (event.dataTransfer.setDragImage) {
-    event.dataTransfer.setDragImage(ghost.item, ghost.x, ghost.y);
-  }
-};
-/**
- * _addGhostPos clones the dragged item and adds it as a Ghost item
- * @param [object] event - the event fired when dragstart is triggered
- * @param [object] ghost - .item = node, draggedItem = jQuery collection
- */
-var _addGhostPos = function(e, ghost) {
-  if (!ghost.x) {
-    ghost.x = parseInt(e.pageX - ghost.draggedItem.offset().left);
-  }
-  if (!ghost.y) {
-    ghost.y = parseInt(e.pageY - ghost.draggedItem.offset().top);
-  }
-  return ghost;
-};
-/**
- * _makeGhost decides which way to make a ghost and passes it to attachGhost
- * @param [jQuery selection] $draggedItem - the item that the user drags
- */
-var _makeGhost = function($draggedItem) {
-  return {
-    item: $draggedItem[0],
-    draggedItem: $draggedItem
-  };
-};
-/**
- * _getGhost constructs ghost and attaches it to dataTransfer
- * @param [event] event - the original drag event object
- * @param [jQuery selection] $draggedItem - the item that the user drags
- * @param [object] ghostOpt - the ghost options
- */
-// TODO: could $draggedItem be replaced by event.target in all instances
-var _getGhost = function(event, $draggedItem) {
-  // add ghost item & draggedItem to ghost object
-  var ghost = _makeGhost($draggedItem);
-  // attach ghost position
-  ghost = _addGhostPos(event, ghost);
-  // attach ghost to dataTransfer
-  _attachGhost(event, ghost);
-};
-/*
- * return options if not set on sortable already
- * @param [object] soptions
- * @param [object] options
- */
-var _getOptions = function(soptions, options) {
-  if (typeof soptions === 'undefined') {
-    return options;
-  }
-  return soptions;
-};
-/*
- * remove data from sortable
- * @param [jquery Collection] a single sortable
- */
-var _removeSortableData = function(sortable) {
-  sortable.removeData('opts');
-  sortable.removeData('connectWith');
-  sortable.removeData('items');
-  sortable.removeAttr('aria-dropeffect');
-};
-/*
- * remove data from items
- * @param [jquery Collection] items
- */
-var _removeItemData = function(items) {
-  items.removeAttr('aria-grabbed');
-  items.removeAttr('draggable');
-  items.removeAttr('role');
-};
-/*
- * check if two lists are connected
- * @param [jquery Collection] items
- */
-var _listsConnected = function(curList, destList) {
-  if (curList[0] === destList[0]) {
-    return true;
-  }
-  if (curList.data('connectWith') !== undefined) {
-    return curList.data('connectWith') === destList.data('connectWith');
-  }
-  return false;
-};
-/*
- * destroy the sortable
- * @param [jquery Collection] a single sortable
- */
-var _destroySortable = function(sortable) {
-  var opts = sortable.data('opts') || {};
-  var items = sortable.children(opts.items);
-  var handles = opts.handle ? items.find(opts.handle) : items;
-  // remove event handlers & data from sortable
-  _removeSortableEvents(sortable);
-  _removeSortableData(sortable);
-  // remove event handlers & data from items
-  handles.off('mousedown.h5s');
-  _removeItemEvents(items);
-  _removeItemData(items);
-};
-/*
- * enable the sortable
- * @param [jquery Collection] a single sortable
- */
-var _enableSortable = function(sortable) {
-  var opts = sortable.data('opts');
-  var items = sortable.children(opts.items);
-  var handles = opts.handle ? items.find(opts.handle) : items;
-  sortable.attr('aria-dropeffect', 'move');
-  handles.attr('draggable', 'true');
-  // IE FIX for ghost
-  // can be disabled as it has the side effect that other events
-  // (e.g. click) will be ignored
-  if (typeof document.createElement('span').dragDrop === 'function' && !opts.disableIEFix) {
-    handles.on('mousedown.h5s', function() {
-      if (items.index(this) !== -1) {
-        this.dragDrop();
-      } else {
-        $(this).parents(opts.items)[0].dragDrop();
-      }
-    });
-  }
-};
-/*
- * disable the sortable
- * @param [jquery Collection] a single sortable
- */
-var _disableSortable = function(sortable) {
-  var opts = sortable.data('opts');
-  var items = sortable.children(opts.items);
-  var handles = opts.handle ? items.find(opts.handle) : items;
-  sortable.attr('aria-dropeffect', 'none');
-  handles.attr('draggable', false);
-  handles.off('mousedown.h5s');
-};
-/*
- * reload the sortable
- * @param [jquery Collection] a single sortable
- * @description events need to be removed to not be double bound
- */
-var _reloadSortable = function(sortable) {
-  var opts = sortable.data('opts');
-  var items = sortable.children(opts.items);
-  var handles = opts.handle ? items.find(opts.handle) : items;
-  // remove event handlers from items
-  _removeItemEvents(items);
-  handles.off('mousedown.h5s');
-  // remove event handlers from sortable
-  _removeSortableEvents(sortable);
-};
-/*
- * public sortable object
- * @param [object|string] options|method
- */
-var sortable = function(selector, options) {
-
-  var $sortables = $(selector);
-  var method = String(options);
-
-  options = $.extend({
-    connectWith: false,
-    placeholder: null,
-    // dragImage can be null or a jQuery element
-    dragImage: null,
-    disableIEFix: false,
-    placeholderClass: 'sortable-placeholder',
-    draggingClass: 'sortable-dragging'
-  }, options);
-
-  /* TODO: maxstatements should be 25, fix and remove line below */
-  /*jshint maxstatements:false */
-  return $sortables.each(function() {
-
-    var $sortable = $(this);
-
-    if (/enable|disable|destroy/.test(method)) {
-      sortable[method]($sortable);
-      return;
-    }
-
-    // get options & set options on sortable
-    options = _getOptions($sortable.data('opts'), options);
-    $sortable.data('opts', options);
-    // reset sortable
-    _reloadSortable($sortable);
-    // initialize
-    var items = $sortable.children(options.items);
-    var index;
-    var startParent;
-    var newParent;
-    var placeholder = (options.placeholder === null) ? $('<' + (/^ul|ol$/i.test(this.tagName) ? 'li' : 'div') + ' class="' + options.placeholderClass + '"/>') : $(options.placeholder).addClass(options.placeholderClass);
-
-    // setup sortable ids
-    if (!$sortable.attr('data-sortable-id')) {
-      var id = sortables.length;
-      sortables[id] = $sortable;
-      $sortable.attr('data-sortable-id', id);
-      items.attr('data-item-sortable-id', id);
-    }
-
-    $sortable.data('items', options.items);
-    placeholders = placeholders.add(placeholder);
-    if (options.connectWith) {
-      $sortable.data('connectWith', options.connectWith);
-    }
-
-    _enableSortable($sortable);
-    items.attr('role', 'option');
-    items.attr('aria-grabbed', 'false');
-
-    // Handle drag events on draggable items
-    items.on('dragstart.h5s', function(e) {
-      e.stopImmediatePropagation();
-
-      if (options.dragImage) {
-        _attachGhost(e.originalEvent, {
-          item: options.dragImage,
-          x: 0,
-          y: 0
-        });
-        console.log('WARNING: dragImage option is deprecated' +
-        ' and will be removed in the future!');
-      } else {
-        // add transparent clone or other ghost to cursor
-        _getGhost(e.originalEvent, $(this), options.dragImage);
-      }
-      // cache selsection & add attr for dragging
-      dragging = $(this);
-      dragging.addClass(options.draggingClass);
-      dragging.attr('aria-grabbed', 'true');
-      // grab values
-      index = dragging.index();
-      draggingHeight = dragging.height();
-      startParent = $(this).parent();
-      // trigger sortstar update
-      dragging.parent().triggerHandler('sortstart', {
-        item: dragging,
-        startparent: startParent
-      });
-    });
-    // Handle drag events on draggable items
-    items.on('dragend.h5s', function() {
-      if (!dragging) {
-        return;
-      }
-      // remove dragging attributes and show item
-      dragging.removeClass(options.draggingClass);
-      dragging.attr('aria-grabbed', 'false');
-      dragging.show();
-
-      placeholders.detach();
-      newParent = $(this).parent();
-      dragging.parent().triggerHandler('sortstop', {
-        item: dragging,
-        startparent: startParent,
-      });
-      if (index !== dragging.index() ||
-          startParent.get(0) !== newParent.get(0)) {
-        dragging.parent().triggerHandler('sortupdate', {
-          item: dragging,
-          index: newParent.children(newParent.data('items')).index(dragging),
-          oldindex: items.index(dragging),
-          elementIndex: dragging.index(),
-          oldElementIndex: index,
-          startparent: startParent,
-          endparent: newParent
-        });
-      }
-      dragging = null;
-      draggingHeight = null;
-    });
-    // Handle drop event on sortable & placeholder
-    // TODO: REMOVE placeholder?????
-    $(this).add([placeholder]).on('drop.h5s', function(e) {
-      if (!_listsConnected($sortable, $(dragging).parent())) {
-        return;
-      }
-
-      e.stopPropagation();
-      placeholders.filter(':visible').after(dragging);
-      dragging.trigger('dragend.h5s');
-      return false;
-    });
-
-    // Handle dragover and dragenter events on draggable items
-    // TODO: REMOVE placeholder?????
-    items.add([this, placeholder]).on('dragover.h5s dragenter.h5s', function(e) {
-      if (!_listsConnected($sortable, $(dragging).parent())) {
-        return;
-      }
-
-      e.preventDefault();
-      e.originalEvent.dataTransfer.dropEffect = 'move';
-      if (items.is(this)) {
-        var thisHeight = $(this).height();
-        if (options.forcePlaceholderSize) {
-          placeholder.height(draggingHeight);
-        }
-
-        // Check if $(this) is bigger than the draggable. If it is, we have to define a dead zone to prevent flickering
-        if (thisHeight > draggingHeight) {
-          // Dead zone?
-          var deadZone = thisHeight - draggingHeight;
-          var offsetTop = $(this).offset().top;
-          if (placeholder.index() < $(this).index() &&
-              e.originalEvent.pageY < offsetTop + deadZone) {
-            return false;
-          }
-          if (placeholder.index() > $(this).index() &&
-              e.originalEvent.pageY > offsetTop + thisHeight - deadZone) {
-            return false;
-          }
-        }
-
-        dragging.hide();
-        if (placeholder.index() < $(this).index()) {
-          $(this).after(placeholder);
-        } else {
-          $(this).before(placeholder);
-        }
-        placeholders.not(placeholder).detach();
-      } else {
-        if (!placeholders.is(this) && !$(this).children(options.items).length) {
-          placeholders.detach();
-          $(this).append(placeholder);
-        }
-      }
-      return false;
-    });
-  });
-};
-
-sortable.destroy = function(sortable) {
-  _destroySortable(sortable);
-};
-
-sortable.enable = function(sortable) {
-  _enableSortable(sortable);
-};
-
-sortable.disable = function(sortable) {
-  _disableSortable(sortable);
-};
-
-$.fn.sortable = function(options) {
-  return sortable(this, options);
-};
-
-return sortable;
-}));
-;
 'use strict';
 
 System.register('flarum/tags/addTagChangePermission', ['flarum/extend', 'flarum/components/PermissionGrid', 'flarum/components/SettingDropdown'], function (_export, _context) {
@@ -662,11 +248,11 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
             babelHelpers.get(EditTagModal.prototype.__proto__ || Object.getPrototypeOf(EditTagModal.prototype), 'init', this).call(this);
 
             this.tag = this.props.tag || app.store.createRecord('tags');
-
             this.name = m.prop(this.tag.name() || '');
             this.slug = m.prop(this.tag.slug() || '');
             this.description = m.prop(this.tag.description() || '');
             this.color = m.prop(this.tag.color() || '');
+            this.backgroundUrl = m.prop(this.tag.backgroundUrl() || '');
             this.isHidden = m.prop(this.tag.isHidden() || false);
           }
         }, {
@@ -740,6 +326,16 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
                   'div',
                   { className: 'Form-group' },
                   m(
+                    'label',
+                    null,
+                    app.translator.trans('flarum-tags.admin.edit_tag.backgroundUrl_label')
+                  ),
+                  m('input', { className: 'FormControl', placeholder: 'fa-icon', value: this.backgroundUrl(), oninput: m.withAttr('value', this.backgroundUrl) })
+                ),
+                m(
+                  'div',
+                  { className: 'Form-group' },
+                  m(
                     'div',
                     null,
                     m(
@@ -776,6 +372,7 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
               slug: this.slug(),
               description: this.description(),
               color: this.color(),
+              backgroundUrl: this.backgroundUrl(),
               isHidden: this.isHidden()
             };
           }
@@ -801,23 +398,21 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
             var _this4 = this;
 
             if (confirm(app.translator.trans('flarum-tags.admin.edit_tag.delete_tag_confirmation'))) {
-              (function () {
-                var children = app.store.all('tags').filter(function (tag) {
-                  return tag.parent() === _this4.tag;
-                });
+              var children = app.store.all('tags').filter(function (tag) {
+                return tag.parent() === _this4.tag;
+              });
 
-                _this4.tag.delete().then(function () {
-                  children.forEach(function (tag) {
-                    return tag.pushData({
-                      attributes: { isChild: false },
-                      relationships: { parent: null }
-                    });
+              this.tag.delete().then(function () {
+                children.forEach(function (tag) {
+                  return tag.pushData({
+                    attributes: { isChild: false },
+                    relationships: { parent: null }
                   });
-                  m.redraw();
                 });
+                m.redraw();
+              });
 
-                _this4.hide();
-              })();
+              this.hide();
             }
           }
         }]);
@@ -1081,7 +676,9 @@ System.register('flarum/tags/components/TagsPage', ['flarum/components/Page', 'f
           value: function config() {
             var _this2 = this;
 
-            this.$('ol, ul').sortable({ connectWith: 'primary' }).on('sortupdate', function (e, ui) {
+            this.$('ol, ul')
+            //  .sortable({connectWith: 'primary'})
+            .on('sortupdate', function (e, ui) {
               // If we've moved a tag from 'primary' to 'secondary', then we'll update
               // its attributes in our local store so that when we redraw the change
               // will be made.
@@ -1163,7 +760,13 @@ System.register('flarum/tags/helpers/tagIcon', [], function (_export, _context) 
 
     if (tag) {
       attrs.style = attrs.style || {};
-      attrs.style.backgroundColor = tag.color();
+
+      if (tag.backgroundUrl()) {
+        attrs.className = 'Button-icon fa fa-fw ' + tag.backgroundUrl();
+        attrs.style.Color = tag.color();
+      } else {
+        attrs.style.backgroundColor = tag.color();
+      }
     } else {
       attrs.className += ' untagged';
     }
@@ -1361,48 +964,48 @@ System.register('flarum/tags/models/Tag', ['flarum/Model', 'flarum/utils/mixin',
 "use strict";
 
 System.register("flarum/tags/utils/sortTags", [], function (_export, _context) {
-  "use strict";
+    "use strict";
 
-  function sortTags(tags) {
-    return tags.slice(0).sort(function (a, b) {
-      var aPos = a.position();
-      var bPos = b.position();
+    function sortTags(tags) {
+        return tags.slice(0).sort(function (a, b) {
+            var aPos = a.position();
+            var bPos = b.position();
 
-      // If they're both secondary tags, sort them by their discussions count,
-      // descending.
-      if (aPos === null && bPos === null) return b.discussionsCount() - a.discussionsCount();
+            // If they're both secondary tags, sort them by their discussions count,
+            // descending.
+            if (aPos === null && bPos === null) return b.discussionsCount() - a.discussionsCount();
 
-      // If just one is a secondary tag, then the primary tag should
-      // come first.
-      if (bPos === null) return -1;
-      if (aPos === null) return 1;
+            // If just one is a secondary tag, then the primary tag should
+            // come first.
+            if (bPos === null) return -1;
+            if (aPos === null) return 1;
 
-      // If we've made it this far, we know they're both primary tags. So we'll
-      // need to see if they have parents.
-      var aParent = a.parent();
-      var bParent = b.parent();
+            // If we've made it this far, we know they're both primary tags. So we'll
+            // need to see if they have parents.
+            var aParent = a.parent();
+            var bParent = b.parent();
 
-      // If they both have the same parent, then their positions are local,
-      // so we can compare them directly.
-      if (aParent === bParent) return aPos - bPos;
+            // If they both have the same parent, then their positions are local,
+            // so we can compare them directly.
+            if (aParent === bParent) return aPos - bPos;
 
-      // If they are both child tags, then we will compare the positions of their
-      // parents.
-      else if (aParent && bParent) return aParent.position() - bParent.position();
+            // If they are both child tags, then we will compare the positions of their
+            // parents.
+            else if (aParent && bParent) return aParent.position() - bParent.position();
 
-        // If we are comparing a child tag with its parent, then we let the parent
-        // come first. If we are comparing an unrelated parent/child, then we
-        // compare both of the parents.
-        else if (aParent) return aParent === b ? 1 : aParent.position() - bPos;else if (bParent) return bParent === a ? -1 : aPos - bParent.position();
+                // If we are comparing a child tag with its parent, then we let the parent
+                // come first. If we are comparing an unrelated parent/child, then we
+                // compare both of the parents.
+                else if (aParent) return aParent === b ? 1 : aParent.position() - bPos;else if (bParent) return bParent === a ? -1 : aPos - bParent.position();
 
-      return 0;
-    });
-  }
+            return 0;
+        });
+    }
 
-  _export("default", sortTags);
+    _export("default", sortTags);
 
-  return {
-    setters: [],
-    execute: function () {}
-  };
+    return {
+        setters: [],
+        execute: function () {}
+    };
 });

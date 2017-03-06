@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags\Listener;
+namespace Sinamics\Tags\Listener;
 
 use Flarum\Event\ConfigurePostTypes;
 use Flarum\Tags\Event\DiscussionWasTagged;

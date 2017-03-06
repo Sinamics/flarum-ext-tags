@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Flarum\Tags;
+namespace Sinamics\Tags;
 
 use Flarum\Core\Discussion;
 use Flarum\Core\Permission;
@@ -53,6 +53,7 @@ class Tag extends AbstractModel
      * @param string $slug
      * @param string $description
      * @param string $color
+     * @param string $backgroundUrl
      * @param bool $isHidden
      * @return static
      */
@@ -64,6 +65,7 @@ class Tag extends AbstractModel
         $tag->slug = $slug;
         $tag->description = $description;
         $tag->color = $color;
+        $tag->backgroundUrl = $backgroundUrl;
         $tag->is_hidden = (bool) $isHidden;
 
         return $tag;
