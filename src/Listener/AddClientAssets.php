@@ -56,6 +56,7 @@ class AddClientAssets
         $routes->get('/t/{slug}', 'tag');
         $routes->get('/tags', 'tags');
     }
+    
     /**
     * Provides i18n files.
     *
@@ -63,9 +64,11 @@ class AddClientAssets
     */
     public function addLocales(ConfigureLocales $event)
     {
-        foreach (new DirectoryIterator(__DIR__ .'/../../locale') as $file) {
+
+        foreach (new DirectoryIterator(__DIR__.'/../../locale') as $file) {
+
             if ($file->isFile() && in_array($file->getExtension(), ['yml', 'yaml'])) {
-                $event->locales->addTranslations($file->getBasename('.' . $file->getExtension()), $file->getPathname());
+                $event->locales->addTranslations($file->getBasename('.'.$file->getExtension()), $file->getPathname());
             }
         }
     }

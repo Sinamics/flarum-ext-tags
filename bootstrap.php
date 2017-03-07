@@ -14,8 +14,8 @@ use Sinamics\Tags\Listener;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return function (Dispatcher $events) {
-     $events->subscribe(Listener\AddClientAssets::class);
-     $events->subscribe(Listener\AddDiscussionTagsRelationship::class);
+    $events->subscribe(Listener\AddClientAssets::class);
+    $events->subscribe(Listener\AddDiscussionTagsRelationship::class);
     $events->subscribe(Listener\AddForumTagsRelationship::class);
     $events->subscribe(Listener\AddTagsApi::class);
     $events->subscribe(Listener\CreatePostWhenTagsAreChanged::class);
