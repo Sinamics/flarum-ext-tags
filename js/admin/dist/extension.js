@@ -1,6 +1,6 @@
 'use strict';
 
-System.register('flarum/tags/addTagChangePermission', ['flarum/extend', 'flarum/components/PermissionGrid', 'flarum/components/SettingDropdown'], function (_export, _context) {
+System.register('sinamics/tags/addTagChangePermission', ['flarum/extend', 'flarum/components/PermissionGrid', 'flarum/components/SettingDropdown'], function (_export, _context) {
   "use strict";
 
   var extend, PermissionGrid, SettingDropdown;
@@ -9,7 +9,7 @@ System.register('flarum/tags/addTagChangePermission', ['flarum/extend', 'flarum/
     extend(PermissionGrid.prototype, 'startItems', function (items) {
       items.add('allowTagChange', {
         icon: 'tag',
-        label: app.translator.trans('flarum-tags.admin.permissions.allow_edit_tags_label'),
+        label: app.translator.trans('sinamics-tags.admin.permissions.allow_edit_tags_label'),
         setting: function setting() {
           var minutes = parseInt(app.data.settings.allow_tag_change, 10);
 
@@ -36,7 +36,7 @@ System.register('flarum/tags/addTagChangePermission', ['flarum/extend', 'flarum/
 });;
 'use strict';
 
-System.register('flarum/tags/addTagPermission', ['flarum/extend', 'flarum/components/PermissionGrid'], function (_export, _context) {
+System.register('sinamics/tags/addTagPermission', ['flarum/extend', 'flarum/components/PermissionGrid'], function (_export, _context) {
   "use strict";
 
   var extend, PermissionGrid;
@@ -45,7 +45,7 @@ System.register('flarum/tags/addTagPermission', ['flarum/extend', 'flarum/compon
     extend(PermissionGrid.prototype, 'moderateItems', function (items) {
       items.add('tag', {
         icon: 'tag',
-        label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
+        label: app.translator.trans('sinamics-tags.admin.permissions.tag_discussions_label'),
         permission: 'discussion.tag'
       }, 95);
     });
@@ -62,7 +62,7 @@ System.register('flarum/tags/addTagPermission', ['flarum/extend', 'flarum/compon
 });;
 'use strict';
 
-System.register('flarum/tags/addTagsHomePageOption', ['flarum/extend', 'flarum/components/BasicsPage'], function (_export, _context) {
+System.register('sinamics/tags/addTagsHomePageOption', ['flarum/extend', 'flarum/components/BasicsPage'], function (_export, _context) {
   "use strict";
 
   var extend, BasicsPage;
@@ -71,7 +71,7 @@ System.register('flarum/tags/addTagsHomePageOption', ['flarum/extend', 'flarum/c
     extend(BasicsPage.prototype, 'homePageItems', function (items) {
       items.add('tags', {
         path: '/tags',
-        label: app.translator.trans('flarum-tags.admin.basics.tags_label')
+        label: app.translator.trans('sinamics-tags.admin.basics.tags_label')
       });
     });
   });
@@ -87,7 +87,7 @@ System.register('flarum/tags/addTagsHomePageOption', ['flarum/extend', 'flarum/c
 });;
 'use strict';
 
-System.register('flarum/tags/addTagsPane', ['flarum/extend', 'flarum/components/AdminNav', 'flarum/components/AdminLinkButton', 'flarum/tags/components/TagsPage'], function (_export, _context) {
+System.register('sinamics/tags/addTagsPane', ['flarum/extend', 'flarum/components/AdminNav', 'flarum/components/AdminLinkButton', 'sinamics/tags/components/TagsPage'], function (_export, _context) {
   "use strict";
 
   var extend, AdminNav, AdminLinkButton, TagsPage;
@@ -95,7 +95,7 @@ System.register('flarum/tags/addTagsPane', ['flarum/extend', 'flarum/components/
   _export('default', function () {
     app.routes.tags = { path: '/tags', component: TagsPage.component() };
 
-    app.extensionSettings['flarum-tags'] = function () {
+    app.extensionSettings['sinamics-tags'] = function () {
       return m.route(app.route('tags'));
     };
 
@@ -103,8 +103,8 @@ System.register('flarum/tags/addTagsPane', ['flarum/extend', 'flarum/components/
       items.add('tags', AdminLinkButton.component({
         href: app.route('tags'),
         icon: 'tags',
-        children: app.translator.trans('flarum-tags.admin.nav.tags_button'),
-        description: app.translator.trans('flarum-tags.admin.nav.tags_text')
+        children: app.translator.trans('sinamics-tags.admin.nav.tags_button'),
+        description: app.translator.trans('sinamics-tags.admin.nav.tags_text')
       }));
     });
   });
@@ -116,15 +116,15 @@ System.register('flarum/tags/addTagsPane', ['flarum/extend', 'flarum/components/
       AdminNav = _flarumComponentsAdminNav.default;
     }, function (_flarumComponentsAdminLinkButton) {
       AdminLinkButton = _flarumComponentsAdminLinkButton.default;
-    }, function (_flarumTagsComponentsTagsPage) {
-      TagsPage = _flarumTagsComponentsTagsPage.default;
+    }, function (_sinamicsTagsComponentsTagsPage) {
+      TagsPage = _sinamicsTagsComponentsTagsPage.default;
     }],
     execute: function () {}
   };
 });;
 'use strict';
 
-System.register('flarum/tags/addTagsPermissionScope', ['flarum/extend', 'flarum/components/PermissionGrid', 'flarum/components/PermissionDropdown', 'flarum/components/Dropdown', 'flarum/components/Button', 'flarum/tags/helpers/tagLabel', 'flarum/tags/helpers/tagIcon', 'flarum/tags/utils/sortTags'], function (_export, _context) {
+System.register('sinamics/tags/addTagsPermissionScope', ['flarum/extend', 'flarum/components/PermissionGrid', 'flarum/components/PermissionDropdown', 'flarum/components/Dropdown', 'flarum/components/Button', 'sinamics/tags/helpers/tagLabel', 'sinamics/tags/helpers/tagIcon', 'sinamics/tags/utils/sortTags'], function (_export, _context) {
   "use strict";
 
   var extend, override, PermissionGrid, PermissionDropdown, Dropdown, Button, tagLabel, tagIcon, sortTags;
@@ -178,7 +178,7 @@ System.register('flarum/tags/addTagsPermissionScope', ['flarum/extend', 'flarum/
         items.add('tag', Dropdown.component({
           className: 'Dropdown--restrictByTag',
           buttonClassName: 'Button Button--text',
-          label: app.translator.trans('flarum-tags.admin.permissions.restrict_by_tag_heading'),
+          label: app.translator.trans('sinamics-tags.admin.permissions.restrict_by_tag_heading'),
           icon: 'plus',
           caretIcon: null,
           children: tags.map(function (tag) {
@@ -207,19 +207,19 @@ System.register('flarum/tags/addTagsPermissionScope', ['flarum/extend', 'flarum/
       Dropdown = _flarumComponentsDropdown.default;
     }, function (_flarumComponentsButton) {
       Button = _flarumComponentsButton.default;
-    }, function (_flarumTagsHelpersTagLabel) {
-      tagLabel = _flarumTagsHelpersTagLabel.default;
-    }, function (_flarumTagsHelpersTagIcon) {
-      tagIcon = _flarumTagsHelpersTagIcon.default;
-    }, function (_flarumTagsUtilsSortTags) {
-      sortTags = _flarumTagsUtilsSortTags.default;
+    }, function (_sinamicsTagsHelpersTagLabel) {
+      tagLabel = _sinamicsTagsHelpersTagLabel.default;
+    }, function (_sinamicsTagsHelpersTagIcon) {
+      tagIcon = _sinamicsTagsHelpersTagIcon.default;
+    }, function (_sinamicsTagsUtilsSortTags) {
+      sortTags = _sinamicsTagsUtilsSortTags.default;
     }],
     execute: function () {}
   };
 });;
 'use strict';
 
-System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal', 'flarum/components/Button', 'flarum/utils/string', 'flarum/tags/helpers/tagLabel'], function (_export, _context) {
+System.register('sinamics/tags/components/EditTagModal', ['flarum/components/Modal', 'flarum/components/Button', 'flarum/utils/string', 'sinamics/tags/helpers/tagLabel'], function (_export, _context) {
   "use strict";
 
   var Modal, Button, slug, tagLabel, EditTagModal;
@@ -230,8 +230,8 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
       Button = _flarumComponentsButton.default;
     }, function (_flarumUtilsString) {
       slug = _flarumUtilsString.slug;
-    }, function (_flarumTagsHelpersTagLabel) {
-      tagLabel = _flarumTagsHelpersTagLabel.default;
+    }, function (_sinamicsTagsHelpersTagLabel) {
+      tagLabel = _sinamicsTagsHelpersTagLabel.default;
     }],
     execute: function () {
       EditTagModal = function (_Modal) {
@@ -266,7 +266,7 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
             return this.name() ? tagLabel({
               name: this.name,
               color: this.color
-            }) : app.translator.trans('flarum-tags.admin.edit_tag.title');
+            }) : app.translator.trans('sinamics-tags.admin.edit_tag.title');
           }
         }, {
           key: 'content',
@@ -285,9 +285,9 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
                   m(
                     'label',
                     null,
-                    app.translator.trans('flarum-tags.admin.edit_tag.name_label')
+                    app.translator.trans('sinamics-tags.admin.edit_tag.name_label')
                   ),
-                  m('input', { className: 'FormControl', placeholder: app.translator.trans('flarum-tags.admin.edit_tag.name_placeholder'), value: this.name(), oninput: function oninput(e) {
+                  m('input', { className: 'FormControl', placeholder: app.translator.trans('sinamics-tags.admin.edit_tag.name_placeholder'), value: this.name(), oninput: function oninput(e) {
                       _this2.name(e.target.value);
                       _this2.slug(slug(e.target.value));
                     } })
@@ -298,7 +298,7 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
                   m(
                     'label',
                     null,
-                    app.translator.trans('flarum-tags.admin.edit_tag.slug_label')
+                    app.translator.trans('sinamics-tags.admin.edit_tag.slug_label')
                   ),
                   m('input', { className: 'FormControl', value: this.slug(), oninput: m.withAttr('value', this.slug) })
                 ),
@@ -308,7 +308,7 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
                   m(
                     'label',
                     null,
-                    app.translator.trans('flarum-tags.admin.edit_tag.description_label')
+                    app.translator.trans('sinamics-tags.admin.edit_tag.description_label')
                   ),
                   m('textarea', { className: 'FormControl', value: this.description(), oninput: m.withAttr('value', this.description) })
                 ),
@@ -318,7 +318,7 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
                   m(
                     'label',
                     null,
-                    app.translator.trans('flarum-tags.admin.edit_tag.color_label')
+                    app.translator.trans('sinamics-tags.admin.edit_tag.color_label')
                   ),
                   m('input', { className: 'FormControl', placeholder: '#aaaaaa', value: this.color(), oninput: m.withAttr('value', this.color) })
                 ),
@@ -328,7 +328,7 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
                   m(
                     'label',
                     null,
-                    app.translator.trans('flarum-tags.admin.edit_tag.backgroundUrl_label')
+                    app.translator.trans('sinamics-tags.admin.edit_tag.backgroundUrl_label')
                   ),
                   m('input', { className: 'FormControl', placeholder: 'fa-icon', value: this.backgroundUrl(), oninput: m.withAttr('value', this.backgroundUrl) })
                 ),
@@ -342,7 +342,7 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
                       'label',
                       { className: 'checkbox' },
                       m('input', { type: 'checkbox', value: '1', checked: this.isHidden(), onchange: m.withAttr('checked', this.isHidden) }),
-                      app.translator.trans('flarum-tags.admin.edit_tag.hide_label')
+                      app.translator.trans('sinamics-tags.admin.edit_tag.hide_label')
                     )
                   )
                 ),
@@ -353,12 +353,12 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
                     type: 'submit',
                     className: 'Button Button--primary EditTagModal-save',
                     loading: this.loading,
-                    children: app.translator.trans('flarum-tags.admin.edit_tag.submit_button')
+                    children: app.translator.trans('sinamics-tags.admin.edit_tag.submit_button')
                   }),
                   this.tag.exists ? m(
                     'button',
                     { type: 'button', className: 'Button EditTagModal-delete', onclick: this.delete.bind(this) },
-                    app.translator.trans('flarum-tags.admin.edit_tag.delete_tag_button')
+                    app.translator.trans('sinamics-tags.admin.edit_tag.delete_tag_button')
                   ) : ''
                 )
               )
@@ -397,7 +397,7 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
           value: function _delete() {
             var _this4 = this;
 
-            if (confirm(app.translator.trans('flarum-tags.admin.edit_tag.delete_tag_confirmation'))) {
+            if (confirm(app.translator.trans('sinamics-tags.admin.edit_tag.delete_tag_confirmation'))) {
               var children = app.store.all('tags').filter(function (tag) {
                 return tag.parent() === _this4.tag;
               });
@@ -425,7 +425,7 @@ System.register('flarum/tags/components/EditTagModal', ['flarum/components/Modal
 });;
 'use strict';
 
-System.register('flarum/tags/components/TagSettingsModal', ['flarum/components/SettingsModal'], function (_export, _context) {
+System.register('sinamics/tags/components/TagSettingsModal', ['flarum/components/SettingsModal'], function (_export, _context) {
   "use strict";
 
   var SettingsModal, TagSettingsModal;
@@ -456,16 +456,16 @@ System.register('flarum/tags/components/TagSettingsModal', ['flarum/components/S
         }, {
           key: 'title',
           value: function title() {
-            return app.translator.trans('flarum-tags.admin.tag_settings.title');
+            return app.translator.trans('sinamics-tags.admin.tag_settings.title');
           }
         }, {
           key: 'form',
           value: function form() {
-            var minPrimaryTags = this.setting('flarum-tags.min_primary_tags', 0);
-            var maxPrimaryTags = this.setting('flarum-tags.max_primary_tags', 0);
+            var minPrimaryTags = this.setting('sinamics-tags.min_primary_tags', 0);
+            var maxPrimaryTags = this.setting('sinamics-tags.max_primary_tags', 0);
 
-            var minSecondaryTags = this.setting('flarum-tags.min_secondary_tags', 0);
-            var maxSecondaryTags = this.setting('flarum-tags.max_secondary_tags', 0);
+            var minSecondaryTags = this.setting('sinamics-tags.min_secondary_tags', 0);
+            var maxSecondaryTags = this.setting('sinamics-tags.max_secondary_tags', 0);
 
             return [m(
               'div',
@@ -473,12 +473,12 @@ System.register('flarum/tags/components/TagSettingsModal', ['flarum/components/S
               m(
                 'label',
                 null,
-                app.translator.trans('flarum-tags.admin.tag_settings.required_primary_heading')
+                app.translator.trans('sinamics-tags.admin.tag_settings.required_primary_heading')
               ),
               m(
                 'div',
                 { className: 'helpText' },
-                app.translator.trans('flarum-tags.admin.tag_settings.required_primary_text')
+                app.translator.trans('sinamics-tags.admin.tag_settings.required_primary_text')
               ),
               m(
                 'div',
@@ -488,7 +488,7 @@ System.register('flarum/tags/components/TagSettingsModal', ['flarum/components/S
                   min: '0',
                   value: minPrimaryTags(),
                   oninput: m.withAttr('value', this.setMinTags.bind(this, minPrimaryTags, maxPrimaryTags)) }),
-                app.translator.trans('flarum-tags.admin.tag_settings.range_separator_text'),
+                app.translator.trans('sinamics-tags.admin.tag_settings.range_separator_text'),
                 m('input', { className: 'FormControl',
                   type: 'number',
                   min: minPrimaryTags(),
@@ -500,12 +500,12 @@ System.register('flarum/tags/components/TagSettingsModal', ['flarum/components/S
               m(
                 'label',
                 null,
-                app.translator.trans('flarum-tags.admin.tag_settings.required_secondary_heading')
+                app.translator.trans('sinamics-tags.admin.tag_settings.required_secondary_heading')
               ),
               m(
                 'div',
                 { className: 'helpText' },
-                app.translator.trans('flarum-tags.admin.tag_settings.required_secondary_text')
+                app.translator.trans('sinamics-tags.admin.tag_settings.required_secondary_text')
               ),
               m(
                 'div',
@@ -515,7 +515,7 @@ System.register('flarum/tags/components/TagSettingsModal', ['flarum/components/S
                   min: '0',
                   value: minSecondaryTags(),
                   oninput: m.withAttr('value', this.setMinTags.bind(this, minSecondaryTags, maxSecondaryTags)) }),
-                app.translator.trans('flarum-tags.admin.tag_settings.range_separator_text'),
+                app.translator.trans('sinamics-tags.admin.tag_settings.range_separator_text'),
                 m('input', { className: 'FormControl',
                   type: 'number',
                   min: minSecondaryTags(),
@@ -533,7 +533,7 @@ System.register('flarum/tags/components/TagSettingsModal', ['flarum/components/S
 });;
 'use strict';
 
-System.register('flarum/tags/components/TagsPage', ['flarum/components/Page', 'flarum/components/Button', 'flarum/tags/components/EditTagModal', 'flarum/tags/components/TagSettingsModal', 'flarum/tags/helpers/tagIcon', 'flarum/tags/utils/sortTags'], function (_export, _context) {
+System.register('sinamics/tags/components/TagsPage', ['flarum/components/Page', 'flarum/components/Button', 'sinamics/tags/components/EditTagModal', 'sinamics/tags/components/TagSettingsModal', 'sinamics/tags/helpers/tagIcon', 'sinamics/tags/utils/sortTags'], function (_export, _context) {
   "use strict";
 
   var Page, Button, EditTagModal, TagSettingsModal, tagIcon, sortTags, TagsPage;
@@ -575,14 +575,14 @@ System.register('flarum/tags/components/TagsPage', ['flarum/components/Page', 'f
       Page = _flarumComponentsPage.default;
     }, function (_flarumComponentsButton) {
       Button = _flarumComponentsButton.default;
-    }, function (_flarumTagsComponentsEditTagModal) {
-      EditTagModal = _flarumTagsComponentsEditTagModal.default;
-    }, function (_flarumTagsComponentsTagSettingsModal) {
-      TagSettingsModal = _flarumTagsComponentsTagSettingsModal.default;
-    }, function (_flarumTagsHelpersTagIcon) {
-      tagIcon = _flarumTagsHelpersTagIcon.default;
-    }, function (_flarumTagsUtilsSortTags) {
-      sortTags = _flarumTagsUtilsSortTags.default;
+    }, function (_sinamicsTagsComponentsEditTagModal) {
+      EditTagModal = _sinamicsTagsComponentsEditTagModal.default;
+    }, function (_sinamicsTagsComponentsTagSettingsModal) {
+      TagSettingsModal = _sinamicsTagsComponentsTagSettingsModal.default;
+    }, function (_sinamicsTagsHelpersTagIcon) {
+      tagIcon = _sinamicsTagsHelpersTagIcon.default;
+    }, function (_sinamicsTagsUtilsSortTags) {
+      sortTags = _sinamicsTagsUtilsSortTags.default;
     }],
     execute: function () {
       TagsPage = function (_Page) {
@@ -608,19 +608,19 @@ System.register('flarum/tags/components/TagsPage', ['flarum/components/Page', 'f
                   m(
                     'p',
                     null,
-                    app.translator.trans('flarum-tags.admin.tags.about_tags_text')
+                    app.translator.trans('sinamics-tags.admin.tags.about_tags_text')
                   ),
                   Button.component({
                     className: 'Button Button--primary',
                     icon: 'plus',
-                    children: app.translator.trans('flarum-tags.admin.tags.create_tag_button'),
+                    children: app.translator.trans('sinamics-tags.admin.tags.create_tag_button'),
                     onclick: function onclick() {
                       return app.modal.show(new EditTagModal());
                     }
                   }),
                   Button.component({
                     className: 'Button',
-                    children: app.translator.trans('flarum-tags.admin.tags.settings_button'),
+                    children: app.translator.trans('sinamics-tags.admin.tags.settings_button'),
                     onclick: function onclick() {
                       return app.modal.show(new TagSettingsModal());
                     }
@@ -639,7 +639,7 @@ System.register('flarum/tags/components/TagsPage', ['flarum/components/Page', 'f
                     m(
                       'label',
                       null,
-                      app.translator.trans('flarum-tags.admin.tags.primary_heading')
+                      app.translator.trans('sinamics-tags.admin.tags.primary_heading')
                     ),
                     m(
                       'ol',
@@ -655,7 +655,7 @@ System.register('flarum/tags/components/TagsPage', ['flarum/components/Page', 'f
                     m(
                       'label',
                       null,
-                      app.translator.trans('flarum-tags.admin.tags.secondary_heading')
+                      app.translator.trans('sinamics-tags.admin.tags.secondary_heading')
                     ),
                     m(
                       'ul',
@@ -750,7 +750,7 @@ System.register('flarum/tags/components/TagsPage', ['flarum/components/Page', 'f
 });;
 'use strict';
 
-System.register('flarum/tags/helpers/tagIcon', [], function (_export, _context) {
+System.register('sinamics/tags/helpers/tagIcon', [], function (_export, _context) {
   "use strict";
 
   function tagIcon(tag) {
@@ -782,7 +782,7 @@ System.register('flarum/tags/helpers/tagIcon', [], function (_export, _context) 
 });;
 'use strict';
 
-System.register('flarum/tags/helpers/tagLabel', ['flarum/utils/extract'], function (_export, _context) {
+System.register('sinamics/tags/helpers/tagLabel', ['flarum/utils/extract'], function (_export, _context) {
   "use strict";
 
   var extract;
@@ -813,7 +813,7 @@ System.register('flarum/tags/helpers/tagLabel', ['flarum/utils/extract'], functi
     return m(link ? 'a' : 'span', attrs, m(
       'span',
       { className: 'TagLabel-text' },
-      tag ? tag.name() : app.translator.trans('flarum-tags.lib.deleted_tag_text')
+      tag ? tag.name() : app.translator.trans('sinamics-tags.lib.deleted_tag_text')
     ));
   }
 
@@ -828,7 +828,7 @@ System.register('flarum/tags/helpers/tagLabel', ['flarum/utils/extract'], functi
 });;
 'use strict';
 
-System.register('flarum/tags/helpers/tagsLabel', ['flarum/utils/extract', 'flarum/tags/helpers/tagLabel', 'flarum/tags/utils/sortTags'], function (_export, _context) {
+System.register('sinamics/tags/helpers/tagsLabel', ['flarum/utils/extract', 'sinamics/tags/helpers/tagLabel', 'sinamics/tags/utils/sortTags'], function (_export, _context) {
   "use strict";
 
   var extract, tagLabel, sortTags;
@@ -862,37 +862,37 @@ System.register('flarum/tags/helpers/tagsLabel', ['flarum/utils/extract', 'flaru
   return {
     setters: [function (_flarumUtilsExtract) {
       extract = _flarumUtilsExtract.default;
-    }, function (_flarumTagsHelpersTagLabel) {
-      tagLabel = _flarumTagsHelpersTagLabel.default;
-    }, function (_flarumTagsUtilsSortTags) {
-      sortTags = _flarumTagsUtilsSortTags.default;
+    }, function (_sinamicsTagsHelpersTagLabel) {
+      tagLabel = _sinamicsTagsHelpersTagLabel.default;
+    }, function (_sinamicsTagsUtilsSortTags) {
+      sortTags = _sinamicsTagsUtilsSortTags.default;
     }],
     execute: function () {}
   };
 });;
 'use strict';
 
-System.register('flarum/tags/main', ['flarum/tags/models/Tag', 'flarum/tags/addTagsPermissionScope', 'flarum/tags/addTagPermission', 'flarum/tags/addTagsPane', 'flarum/tags/addTagsHomePageOption', 'flarum/tags/addTagChangePermission'], function (_export, _context) {
+System.register('sinamics/tags/main', ['sinamics/tags/models/Tag', 'sinamics/tags/addTagsPermissionScope', 'sinamics/tags/addTagPermission', 'sinamics/tags/addTagsPane', 'sinamics/tags/addTagsHomePageOption', 'sinamics/tags/addTagChangePermission'], function (_export, _context) {
   "use strict";
 
   var Tag, addTagsPermissionScope, addTagPermission, addTagsPane, addTagsHomePageOption, addTagChangePermission;
   return {
-    setters: [function (_flarumTagsModelsTag) {
-      Tag = _flarumTagsModelsTag.default;
-    }, function (_flarumTagsAddTagsPermissionScope) {
-      addTagsPermissionScope = _flarumTagsAddTagsPermissionScope.default;
-    }, function (_flarumTagsAddTagPermission) {
-      addTagPermission = _flarumTagsAddTagPermission.default;
-    }, function (_flarumTagsAddTagsPane) {
-      addTagsPane = _flarumTagsAddTagsPane.default;
-    }, function (_flarumTagsAddTagsHomePageOption) {
-      addTagsHomePageOption = _flarumTagsAddTagsHomePageOption.default;
-    }, function (_flarumTagsAddTagChangePermission) {
-      addTagChangePermission = _flarumTagsAddTagChangePermission.default;
+    setters: [function (_sinamicsTagsModelsTag) {
+      Tag = _sinamicsTagsModelsTag.default;
+    }, function (_sinamicsTagsAddTagsPermissionScope) {
+      addTagsPermissionScope = _sinamicsTagsAddTagsPermissionScope.default;
+    }, function (_sinamicsTagsAddTagPermission) {
+      addTagPermission = _sinamicsTagsAddTagPermission.default;
+    }, function (_sinamicsTagsAddTagsPane) {
+      addTagsPane = _sinamicsTagsAddTagsPane.default;
+    }, function (_sinamicsTagsAddTagsHomePageOption) {
+      addTagsHomePageOption = _sinamicsTagsAddTagsHomePageOption.default;
+    }, function (_sinamicsTagsAddTagChangePermission) {
+      addTagChangePermission = _sinamicsTagsAddTagChangePermission.default;
     }],
     execute: function () {
 
-      app.initializers.add('flarum-tags', function (app) {
+      app.initializers.add('sinamics-tags', function (app) {
         app.store.models.tags = Tag;
         addTagsPermissionScope();
         addTagPermission();
@@ -905,7 +905,7 @@ System.register('flarum/tags/main', ['flarum/tags/models/Tag', 'flarum/tags/addT
 });;
 'use strict';
 
-System.register('flarum/tags/models/Tag', ['flarum/Model', 'flarum/utils/mixin', 'flarum/utils/computed'], function (_export, _context) {
+System.register('sinamics/tags/models/Tag', ['flarum/Model', 'flarum/utils/mixin', 'flarum/utils/computed'], function (_export, _context) {
   "use strict";
 
   var Model, mixin, computed, Tag;
@@ -961,7 +961,7 @@ System.register('flarum/tags/models/Tag', ['flarum/Model', 'flarum/utils/mixin',
 });;
 "use strict";
 
-System.register("flarum/tags/utils/sortTags", [], function (_export, _context) {
+System.register("sinamics/tags/utils/sortTags", [], function (_export, _context) {
     "use strict";
 
     function sortTags(tags) {

@@ -27,7 +27,7 @@
             "dev-master": "0.1.1-dev"
         },
         "flarum-extension": {
-            "title": "Tags",
+            "title": "Sinamics-Tags",
             "icon": {
                 "name": "tags",
                 "backgroundColor": "#F28326",

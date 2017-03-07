@@ -4,9 +4,9 @@ import PermissionDropdown from 'flarum/components/PermissionDropdown';
 import Dropdown from 'flarum/components/Dropdown';
 import Button from 'flarum/components/Button';
 
-import tagLabel from 'flarum/tags/helpers/tagLabel';
-import tagIcon from 'flarum/tags/helpers/tagIcon';
-import sortTags from 'flarum/tags/utils/sortTags';
+import tagLabel from 'sinamics/tags/helpers/tagLabel';
+import tagIcon from 'sinamics/tags/helpers/tagIcon';
+import sortTags from 'sinamics/tags/utils/sortTags';
 
 export default function() {
   override(app, 'getRequiredPermissions', (original, permission) => {
@@ -51,7 +51,7 @@ export default function() {
       items.add('tag', Dropdown.component({
         className: 'Dropdown--restrictByTag',
         buttonClassName: 'Button Button--text',
-        label: app.translator.trans('flarum-tags.admin.permissions.restrict_by_tag_heading'),
+        label: app.translator.trans('sinamics-tags.admin.permissions.restrict_by_tag_heading'),
         icon: 'plus',
         caretIcon: null,
         children: tags.map(tag => Button.component({

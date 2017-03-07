@@ -14,6 +14,7 @@ namespace Sinamics\Tags\Listener;
 use Flarum\Event\ConfigureForumRoutes;
 use Flarum\Event\ConfigureWebApp;
 use Illuminate\Contracts\Events\Dispatcher;
+use Flarum\Event\ConfigureLocales;
 
 class AddClientAssets
 {
@@ -35,7 +36,7 @@ class AddClientAssets
                 __DIR__.'/../../js/forum/dist/extension.js',
                 __DIR__.'/../../less/forum/extension.less'
             ]);
-            $app->addBootstrapper('flarum/tags/main');
+            $app->addBootstrapper('sinamics/tags/main');
         }
 
         if ($app->isAdmin()) {
@@ -43,7 +44,7 @@ class AddClientAssets
                 __DIR__.'/../../js/admin/dist/extension.js',
                 __DIR__.'/../../less/admin/extension.less'
             ]);
-            $app->addBootstrapper('flarum/tags/main');
+            $app->addBootstrapper('sinamics/tags/main');
         }
     }
 
@@ -54,5 +55,18 @@ class AddClientAssets
     {
         $routes->get('/t/{slug}', 'tag');
         $routes->get('/tags', 'tags');
+    }
+    /**
+    * Provides i18n files.
+    *
+    * @param ConfigureLocales $event
+    */
+    public function addLocales(ConfigureLocales $event)
+    {
+        foreach (new DirectoryIterator(__DIR__ .'/../../locale') as $file) {
+            if ($file->isFile() && in_array($file->getExtension(), ['yml', 'yaml'])) {
+                $event->locales->addTranslations($file->getBasename('.' . $file->getExtension()), $file->getPathname());
+            }
+        }
     }
 }

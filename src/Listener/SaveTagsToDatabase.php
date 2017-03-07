@@ -130,8 +130,8 @@ class SaveTagsToDatabase
      */
     protected function validateTagCount($type, $count)
     {
-        $min = $this->settings->get('flarum-tags.min_'.$type.'_tags');
-        $max = $this->settings->get('flarum-tags.max_'.$type.'_tags');
+        $min = $this->settings->get('sinamics-tags.min_'.$type.'_tags');
+        $max = $this->settings->get('sinamics-tags.max_'.$type.'_tags');
         $key = 'tag_count_'.$type;
 
         $validator = $this->validator->make(

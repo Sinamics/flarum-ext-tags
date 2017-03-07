@@ -1,5 +1,5 @@
 import LinkButton from 'flarum/components/LinkButton';
-import tagIcon from 'flarum/tags/helpers/tagIcon';
+import tagIcon from 'sinamics/tags/helpers/tagIcon';
 
 export default class TagLinkButton extends LinkButton {
   view() {
@@ -22,6 +22,6 @@ export default class TagLinkButton extends LinkButton {
 
     props.params.tags = tag ? tag.slug() : 'untagged';
     props.href = app.route('tag', props.params);
-    props.children = tag ? tag.name() : app.translator.trans('flarum-tags.forum.index.untagged_link');
+    props.children = tag ? tag.name() : app.translator.trans('sinamics-tags.forum.index.untagged_link');
   }
 }

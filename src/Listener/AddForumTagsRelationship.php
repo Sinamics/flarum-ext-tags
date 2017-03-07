@@ -88,10 +88,10 @@ class AddForumTagsRelationship
     public function prepareApiAttributes(PrepareApiAttributes $event)
     {
         if ($event->isSerializer(ForumSerializer::class)) {
-            $event->attributes['minPrimaryTags'] = $this->settings->get('flarum-tags.min_primary_tags');
-            $event->attributes['maxPrimaryTags'] = $this->settings->get('flarum-tags.max_primary_tags');
-            $event->attributes['minSecondaryTags'] = $this->settings->get('flarum-tags.min_secondary_tags');
-            $event->attributes['maxSecondaryTags'] = $this->settings->get('flarum-tags.max_secondary_tags');
+            $event->attributes['minPrimaryTags'] = $this->settings->get('sinamics-tags.min_primary_tags');
+            $event->attributes['maxPrimaryTags'] = $this->settings->get('sinamics-tags.max_primary_tags');
+            $event->attributes['minSecondaryTags'] = $this->settings->get('sinamics-tags.min_secondary_tags');
+            $event->attributes['maxSecondaryTags'] = $this->settings->get('sinamics-tags.max_secondary_tags');
         }
     }
 }

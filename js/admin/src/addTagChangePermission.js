@@ -6,7 +6,7 @@ export default function() {
   extend(PermissionGrid.prototype, 'startItems', items => {
     items.add('allowTagChange', {
       icon: 'tag',
-      label: app.translator.trans('flarum-tags.admin.permissions.allow_edit_tags_label'),
+      label: app.translator.trans('sinamics-tags.admin.permissions.allow_edit_tags_label'),
       setting: () => {
         const minutes = parseInt(app.data.settings.allow_tag_change, 10);
 

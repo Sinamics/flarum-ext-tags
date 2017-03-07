@@ -1,11 +1,11 @@
-import Tag from 'flarum/tags/models/Tag';
-import addTagsPermissionScope from 'flarum/tags/addTagsPermissionScope';
-import addTagPermission from 'flarum/tags/addTagPermission';
-import addTagsPane from 'flarum/tags/addTagsPane';
-import addTagsHomePageOption from 'flarum/tags/addTagsHomePageOption';
-import addTagChangePermission from 'flarum/tags/addTagChangePermission';
+import Tag from 'sinamics/tags/models/Tag';
+import addTagsPermissionScope from 'sinamics/tags/addTagsPermissionScope';
+import addTagPermission from 'sinamics/tags/addTagPermission';
+import addTagsPane from 'sinamics/tags/addTagsPane';
+import addTagsHomePageOption from 'sinamics/tags/addTagsHomePageOption';
+import addTagChangePermission from 'sinamics/tags/addTagChangePermission';
 
-app.initializers.add('flarum-tags', app => {
+app.initializers.add('sinamics-tags', app => {
   app.store.models.tags = Tag;
   addTagsPermissionScope();
   addTagPermission();

@@ -5,7 +5,7 @@ gulp({
     'bower_components/html.sortable/dist/html.sortable.js'
   ],
   modules: {
-    'flarum/tags': [
+    'sinamics/tags': [
       '../lib/**/*.js',
       'src/**/*.js'
     ]

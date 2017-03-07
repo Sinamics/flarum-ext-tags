@@ -2,8 +2,8 @@ import { extend, override } from 'flarum/extend';
 import IndexPage from 'flarum/components/IndexPage';
 import DiscussionComposer from 'flarum/components/DiscussionComposer';
 
-import TagDiscussionModal from 'flarum/tags/components/TagDiscussionModal';
-import tagsLabel from 'flarum/tags/helpers/tagsLabel';
+import TagDiscussionModal from 'sinamics/tags/components/TagDiscussionModal';
+import tagsLabel from 'sinamics/tags/helpers/tagsLabel';
 
 export default function() {
   extend(IndexPage.prototype, 'composeNewDiscussion', function(promise) {
@@ -37,7 +37,7 @@ export default function() {
       <a className="DiscussionComposer-changeTags" onclick={this.chooseTags.bind(this)}>
         {this.tags.length
           ? tagsLabel(this.tags)
-          : <span className="TagLabel untagged">{app.translator.trans('flarum-tags.forum.composer_discussion.choose_tags_link')}</span>}
+          : <span className="TagLabel untagged">{app.translator.trans('sinamics-tags.forum.composer_discussion.choose_tags_link')}</span>}
       </a>
     ), 10);
   });
