@@ -7,7 +7,6 @@ import addTagChangePermission from 'flarum/tags/addTagChangePermission';
 
 app.initializers.add('flarum-tags', app => {
   app.store.models.tags = Tag;
-
   addTagsPermissionScope();
   addTagPermission();
   addTagsPane();

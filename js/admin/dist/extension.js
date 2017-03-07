@@ -894,7 +894,6 @@ System.register('flarum/tags/main', ['flarum/tags/models/Tag', 'flarum/tags/addT
 
       app.initializers.add('flarum-tags', function (app) {
         app.store.models.tags = Tag;
-
         addTagsPermissionScope();
         addTagPermission();
         addTagsPane();

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "091a7686702561d486d12170bb7cc880",
+    "content-hash": "dede0e5304c1db4ee296bb354cf184c5",
     "packages": [
         {
             "name": "components/font-awesome",
@@ -621,16 +621,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.1.7",
+            "version": "2.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "1a8192deae1f35aabc3a73aad19cd07c68091dd1"
+                "reference": "f2950be7da8b8d6c4e77821b6c9d486e36cdc4f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/1a8192deae1f35aabc3a73aad19cd07c68091dd1",
-                "reference": "1a8192deae1f35aabc3a73aad19cd07c68091dd1",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/f2950be7da8b8d6c4e77821b6c9d486e36cdc4f3",
+                "reference": "f2950be7da8b8d6c4e77821b6c9d486e36cdc4f3",
                 "shasum": ""
             },
             "require": {
@@ -678,7 +678,7 @@
                 "whoops",
                 "zf2"
             ],
-            "time": "2017-03-02T16:54:56+00:00"
+            "time": "2017-03-07T09:04:45+00:00"
         },
         {
             "name": "flarum/core",
