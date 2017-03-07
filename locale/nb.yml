@@ -1,0 +1,102 @@
+sinamics-tags:
+
+  ##
+  # UNIQUE KEYS - The following keys are used in only one location each.
+  ##
+
+  # Translations in this namespace are used by the admin interface.
+  admin:
+
+    # These translations are used in the Basics page.
+    basics:
+      tags_label: => sinamics-tags.ref.tags
+
+    # These translations are used in the Edit Tag modal dialog.
+    edit_tag:
+      color_label: Farge
+      delete_tag_button: Slett emneknagg
+      delete_tag_confirmation: "Er du sikker på at du vil slette emneknaggen? Tilhørende diskusjoner blir IKKE slettet."
+      description_label: Beskrivelse
+      backgroundUrl_label: Font Awesome Ikon
+      hide_label: Gjem i alle diskusjoner
+      name_label: => sinamics-tags.ref.name
+      name_placeholder: => sinamics-tags.ref.name
+      slug_label: Kode
+      submit_button: => core.ref.save_changes
+      title: => sinamics-tags.ref.create_tag
+
+    # These translations are used in the navigation bar.
+    nav:
+      tags_button: => sinamics-tags.ref.tags
+      tags_text: Organiser emneknagger.
+
+    # These translations are used in the Permissions page of the admin interface.
+    permissions:
+      allow_edit_tags_label: Redigere emneknagger
+      restrict_by_tag_heading: Begrens til emneknagg
+      tag_discussions_label: Legge til emneknagg i en diskusjon
+
+    # These translations are used in the Tag Settings modal dialog.
+    tag_settings:
+      range_separator_text: " til "
+      required_primary_heading: Laveste antall primærknagger
+      required_primary_text: Oppgi laveste og høyeste antall primærknagger en diskusjon kan ha.
+      required_secondary_heading: Laveste antall sekundærknagger
+      required_secondary_text: Oppgi laveste og høyeste antall sekundærknagger en diskusjon kan ha.
+      title: Emneknagginnstillinger
+
+    # These translations are used in the Tags page.
+    tags:
+      about_tags_text: "Emneknagger brukes til å kategorisere diskusjoner. Primærknagger er som tradisjonelle forumkategorier: De kan organiseres i et hierarki med to nivåer. Sekundærknagger virker ikke hierarkisk og er nyttige til mikrokategorisering."
+      create_tag_button: => sinamics-tags.ref.create_tag
+      primary_heading: Primærknagger
+      secondary_heading: Sekundærknagger
+      settings_button: Innstillinger
+
+  # Translations in this namespace are used by the forum user interface.
+  forum:
+
+    # These translations are used by the Choose Tags modal dialog.
+    choose_tags:
+      choose_primary_placeholder: "Velg en primærknagg|Velg {count} primærknagger"
+      choose_secondary_placeholder: "Velg 1 emneknagg til|Velg {count} emneknagger til"
+      edit_title: "Rediger emneknaggene til {title}"
+      submit_button: => core.ref.okay
+      title: Velg emneknagger til diskusjonen din
+
+    # These translations are used by the composer when starting a discussion.
+    composer_discussion:
+      choose_tags_link: Velg emneknagger
+
+    # These translations are used by the discussion control buttons.
+    discussion_controls:
+      edit_tags_button: Rediger emneknagger
+
+    # These translations are used on the index page, peripheral to the discussion list.
+    index:
+      more_link: Mer …
+      tags_link: => sinamics-tags.ref.tags
+      untagged_link: Uten emneknagg
+
+    # These translations are displayed between posts in the post stream.
+    post_stream:
+      added_tags_text: "{username} la til {tagsAdded}."
+      added_and_removed_tags_text: "{username} la til {tagsAdded} og fjernet {tagsRemoved}."
+      removed_tags_text: "{username} fjernet {tagsRemoved}."
+      tags_text: "{tags} emneknagg|{tags} emneknagger"
+
+  # Translations in this namespace are used by the forum and admin interfaces.
+  lib:
+
+    # This translation is displayed in place of the name of a tag that's been deleted.
+    deleted_tag_text: Slettet
+
+  ##
+  # REUSED TRANSLATIONS - These keys should not be used directly in code!
+  ##
+
+  # Translations in this namespace are referenced by two or more unique keys.
+  ref:
+    create_tag: Lag emneknagg
+    name: Navn
+    tags: Emneknagger
