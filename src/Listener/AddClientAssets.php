@@ -10,7 +10,7 @@
  */
 
 namespace Sinamics\Tags\Listener;
-
+use DirectoryIterator;
 use Flarum\Event\ConfigureForumRoutes;
 use Flarum\Event\ConfigureWebApp;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -18,6 +18,9 @@ use Flarum\Event\ConfigureLocales;
 
 class AddClientAssets
 {
+
+
+
     /**
      * @param Dispatcher $events
      */
@@ -25,6 +28,7 @@ class AddClientAssets
     {
         $events->listen(ConfigureWebApp::class, [$this, 'addAssets']);
         $events->listen(ConfigureForumRoutes::class, [$this, 'addRoutes']);
+        $events->listen(ConfigureLocales::class, [$this, 'addLocales']);
     }
     /**
      * @param ConfigureWebApp $app
@@ -57,14 +61,13 @@ class AddClientAssets
         $routes->get('/tags', 'tags');
     }
     
-    /**
+        /**
     * Provides i18n files.
     *
     * @param ConfigureLocales $event
     */
     public function addLocales(ConfigureLocales $event)
     {
-
         foreach (new DirectoryIterator(__DIR__.'/../../locale') as $file) {
 
             if ($file->isFile() && in_array($file->getExtension(), ['yml', 'yaml'])) {
