@@ -12,8 +12,8 @@
 use Flarum\Database\Migration;
 
 return Migration::addSettings([
-    'flarum-tags.max_primary_tags' => '1',
-    'flarum-tags.min_primary_tags' => '1',
-    'flarum-tags.max_secondary_tags' => '3',
-    'flarum-tags.min_secondary_tags' => '0',
+    'sinamics-tags.max_primary_tags' => '1',
+    'sinamics-tags.min_primary_tags' => '1',
+    'sinamics-tags.max_secondary_tags' => '3',
+    'sinamics-tags.min_secondary_tags' => '0',
 ]);
